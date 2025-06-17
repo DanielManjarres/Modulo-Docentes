@@ -1,5 +1,10 @@
 package com.example.modulodocentes.strategy;
 
+// Versión: 1.1.4 - Añadida normalización de tipo_aula y manejo de mayúsculas
+// Última actualización: 17/06/2025 - Mejora en validación de tipo_aula
+// Patrones: Strategy (implementa la validación de preferencias)
+// Principios SOLID: Single Responsibility (solo valida), Liskov Substitution (cumple con ValidationStrategy)
+// Antipatrones evitados: No se mezcla lógica de negocio (evita God Object)
 import com.example.modulodocentes.model.Preferencia;
 import com.example.modulodocentes.repository.DocenteRepository;
 import org.slf4j.Logger;
