@@ -13,7 +13,6 @@ package com.example.modulodocentes.controller;
 //   - Transaction Script: Delega lógica al servicio y repositorio.
 //   - Smart UI: Separa la presentación de la lógica.
 import com.example.modulodocentes.service.NotificationService;
-import com.example.modulodocentes.controller.MessageResponse;
 import com.example.modulodocentes.model.Notification;
 import com.example.modulodocentes.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

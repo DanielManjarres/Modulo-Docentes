@@ -25,7 +25,7 @@ public class PreferenciaController {
     public ResponseEntity<?> createPreferencia(@RequestBody Preferencia preferencia) {
         try {
             Preferencia createdPreferencia = preferenciaService.createPreferencia(preferencia);
-            return ResponseEntity.ok(createdPreferencia);
+            return ResponseEntity.ok(new MessageResponse("Preferencia registrada",createdPreferencia));
         } catch (IllegalArgumentException | IllegalStateException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage(), null));
         }

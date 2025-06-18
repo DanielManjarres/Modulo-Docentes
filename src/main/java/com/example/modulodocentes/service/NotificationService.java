@@ -29,34 +29,35 @@ public class NotificationService {
     private NotificationRepository notificationRepository;
 
     public void sendNotification(String docenteId, String asignatura, String aula, String horario, String motivo) {
-        // Simulación del envío de correo
         String message = String.format(
                 "Notificación para el docente %s:\nAsignatura: %s\nAula: %s\nHorario: %s\nMotivo: %s",
                 docenteId, asignatura, aula, horario, motivo
         );
         System.out.println("Enviando correo: " + message);
 
-        // Crear y guardar el registro en MongoDB
         Notification notification = new Notification();
         notification.setDocenteId(docenteId);
         notification.setAsignatura(asignatura);
         notification.setAula(aula);
         notification.setHorario(horario);
         notification.setMotivo(motivo);
-        notification.setStatus("Enviado"); // Estado inicial
-        notification.setTimestamp(System.currentTimeMillis()); // Marca de tiempo
+        notification.setStatus("Enviado");
+        notification.setTimestamp(getCurrentTimeMillis());
         notificationRepository.save(notification);
 
-        // Publicar el evento
         NotificationEvent event = new NotificationEvent(this, docenteId, asignatura, aula, horario, motivo);
         eventPublisher.publishEvent(event);
 
-        // Verificación del tiempo de envío (<10 segundos)
-        long startTime = System.currentTimeMillis();
-        if (System.currentTimeMillis() - startTime < 10000) {
+        long startTime = getCurrentTimeMillis();
+        if (getCurrentTimeMillis() - startTime < 10000) {
             System.out.println("Correo enviado exitosamente a docente " + docenteId);
         } else {
             throw new RuntimeException("Fallo en el envío: tiempo excedido");
         }
+    }
+
+    // Método protegido para inyección de tiempo en pruebas
+    protected long getCurrentTimeMillis() {
+        return System.currentTimeMillis();
     }
 }

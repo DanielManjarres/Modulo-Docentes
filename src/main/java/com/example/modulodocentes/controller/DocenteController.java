@@ -25,7 +25,7 @@ public class DocenteController {
     public ResponseEntity<?> createDocente(@RequestBody Docente docente) {
         try {
             Docente createdDocente = docenteService.createDocente(docente);
-            return ResponseEntity.ok(createdDocente);
+            return ResponseEntity.ok(new MessageResponse("Docente registrado exitosamente",createdDocente));
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage(), null));
         }
@@ -58,7 +58,7 @@ public class DocenteController {
     public ResponseEntity<?> updateDocente(@PathVariable String id, @RequestBody Docente docenteDetails) {
         try {
             Docente updatedDocente = docenteService.updateDocente(id, docenteDetails);
-            return ResponseEntity.ok(new MessageResponse("Docente actualizado correctamente", updatedDocente));
+            return ResponseEntity.ok(new MessageResponse("Docente actualizado exitosamente", updatedDocente));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage(), null));
         }

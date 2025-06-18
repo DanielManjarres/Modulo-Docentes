@@ -22,7 +22,7 @@ public class DocenteService {
     // Crea un nuevo docente, verificando duplicados por identificacion
     public Docente createDocente(Docente docente) {
         if (docenteRepository.findByIdentificacion(docente.getIdentificacion()).isPresent()) {
-            throw new IllegalStateException("Ya existe un docente con esta identificación.");
+            throw new IllegalStateException("Id duplicado registro no permitido.");
         }
         return docenteRepository.save(docente);
     }
